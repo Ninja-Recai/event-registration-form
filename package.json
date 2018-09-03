@@ -1,0 +1,36 @@
+{
+  "name": "register-form",
+  "version": "1.0.0",
+  "description": "Event registration form",
+  "main": "app.js",
+  "private": true,
+  "author": "Recai",
+  "license": "ISC",
+  "engines": {
+    "node": "9.5.0"
+  },
+  "scripts": {
+    "start": "concurrently --raw \"npm run server\" \"npm run client --color\"",
+    "server": "node ./bin/www",
+    "client": "node start-client.js",
+    "build:client": "node build-client.js",
+    "test:client": "node test-client.js",
+    "debug": "node-debug ./bin/www",
+    "express": "node ./bin/www",
+    "express-debug": "node-debug ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "express-validator": "^5.3.0",
+    "mongodb": "^3.0.8",
+    "mongoose": "^5.1.0",
+    "morgan": "^1.9.0",
+    "pug": "^2.0.3",
+    "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.1.0"
+  }
+}

@@ -10,7 +10,7 @@ const eventSchema = mongoose.Schema({
   collection: config.client.mongodb.deffaultCollection,
 });
 const Event = mongoose.model('Event', eventSchema);
-
+const options = { useNewUrlParser: true };
 class DB {
   connect(uri) {
     return new Promise((resolve, reject) => {
@@ -42,10 +42,10 @@ class DB {
         if (!event) {
           obj.save(function (err, obj) {
             if (err) reject(err);
-            resolve(`Congratulations ${obj.firstName}, your event was added to the database succesfully.`);
+            resolve({ ok: true, message: `Congratulations ${obj.firstName}, your event was added to the database succesfully.` });
           });
         } else {
-          resolve(`Your event planned on ${obj.eventDate} already exists in the database.`);
+          resolve({ ok: false, message: `Your event planned on ${obj.eventDate} already exists in the database. Please select another date.` });
         }
       });
     });

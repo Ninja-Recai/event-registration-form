@@ -1,0 +1,46 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:jest/recommended",
+    "react-app"
+  ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {
+        "root": [
+          "./src"
+        ]
+      }
+    }
+  },
+  "plugins": [
+    "jest"
+  ],
+  "env": {
+    "jest/globals": true,
+    "browser": true
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "prefer-destructuring": [
+      "off"
+    ],
+    "import/prefer-default-export": [
+      "off"
+    ],
+    "no-confusing-arrow": [
+      "off"
+    ],
+    "react/destructuring-assignment": [
+      "off"
+    ],
+    "react/prefer-stateless-function": [
+      "off"
+    ]
+  }
+}

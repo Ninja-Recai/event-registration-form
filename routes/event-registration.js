@@ -15,7 +15,6 @@ const yy = today.getFullYear();
 router.post('/addEvent', [
   body('firstName', 'Please specify your first name.')
     .not().isEmpty()
-    .isLength({ min: 5 })
     .trim()
     .escape(),
   body('lastName', 'Please specify your last name.')
@@ -55,6 +54,19 @@ router.post('/addEvent', [
         }
         db.disconnect();
       });
+  },
+  err => {
+    res.json({ error: true, message: err });
+  });
+});
+
+router.get('/getList', function (req, res, next) {
+  db.connect(config.client.mongodb.defaultUri).then(() => {
+    db.getEvents()
+    .then(response => {
+      res.json({ response });
+      db.disconnect();
+    });
   },
   err => {
     res.json({ error: true, message: err });

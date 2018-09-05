@@ -56,7 +56,7 @@ class Form extends Component {
     const mm = today.getMonth() + 1;
     const yy = today.getFullYear();
     return (
-      <PlainForm method="POST" action="/event/addEvent" onSubmit={this.submit}>
+      <PlainForm onSubmit={this.submit}>
         <H2 textAlign="center">Fill in the form to register your future event.</H2>
         <Row spaceBetween>
           <Input

@@ -1,12 +1,19 @@
 import React from 'react';
-import H1 from 'components/H1';
+import H2 from 'components/H2';
+import styled from 'styled-components';
+
+const PlainNotFound = styled.section`
+  width: 100%;
+  text-align: center;
+  padding: 5rem 0;
+`;
 
 export default function NotFound() {
   return (
-    <section>
-      <H1>
+    <PlainNotFound>
+      <H2 fontSize="5rem" textAlign="center">
         404 Not found
-      </H1>
-    </section>
+      </H2>
+    </PlainNotFound>
   );
 }

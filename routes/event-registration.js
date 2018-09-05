@@ -5,6 +5,7 @@ const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const config = require('../config.js');
 const DB = require('../js/db.js');
+
 const db = new DB();
 
 const today = new Date();
@@ -38,10 +39,13 @@ router.post('/addEvent', [
   sanitizeBody('email')
     .normalizeEmail(),
   sanitizeBody('eventDate').toDate(),
-], (req, res, next) => {
+], (req, res) => { 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ error: true, message: errors.array().map(error => error.msg) });
+    return res.status(422).json({ 
+      error: true, 
+      message: errors.array().map(error => error.msg),
+    });
   }
 
   db.connect(config.client.mongodb.defaultUri).then(() => {

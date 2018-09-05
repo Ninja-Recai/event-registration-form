@@ -1,7 +1,7 @@
-import { ActionType } from 'actions/constants';
+import { ActionTypeEvent } from 'actions/constants';
 
 export const addEvent = payload => ({
-  type: ActionType.ADD_EVENT,
+  type: ActionTypeEvent.ADD_EVENT,
   payload,
   meta: {
     fetch: {

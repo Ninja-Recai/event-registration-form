@@ -7,7 +7,7 @@ const eventSchema = mongoose.Schema({
   email: String,
   eventDate: Date,
 }, {
-  collection: config.client.mongodb.deffaultCollection,
+  collection: config.client.mongodb.defaultCollection,
 });
 const Event = mongoose.model('Event', eventSchema);
 const options = { useNewUrlParser: true };
@@ -34,10 +34,10 @@ class DB {
     const obj = new Event(event);
     return new Promise((resolve, reject) => {
       Event.findOne({ 
-        firstName: obj.firstName ? obj.firstName : null,
-        lastName: obj.lastName ? obj.lastName : null,
-        email: obj.email ? obj.email : null,
-        eventDate: obj.eventDate ? obj.eventDate : null,
+        firstName: obj.firstName || null,
+        lastName: obj.lastName || null,
+        email: obj.email || null,
+        eventDate: obj.eventDate || null,
       }, function (err, event) {
         if (!event) {
           obj.save(function (err, obj) {
@@ -52,7 +52,6 @@ class DB {
   }
 
   getEvents() {
-    const _this = this;
     return new Promise((resolve, reject) => {
       Event.find(function (err, events) {
         if (err) reject(err);
@@ -62,8 +61,8 @@ class DB {
   }
 
   cleanDB() {
-    return new Promise((resolve, reject) => {
-      Event.remove({}, function (err) {
+    return new Promise((resolve) => {
+      Event.remove({}, function () {
         resolve('Database was cleaned succesfully');
       });
     });

@@ -1,4 +1,5 @@
-import { createReducer } from 'utils/reducers/create-reducer';
+import * as R from 'ramda';
+import { createReducer } from 'zeal-redux-utils';
 import { ActionTypeForm } from 'actions/constants';
 
 const initialState = {
@@ -11,11 +12,6 @@ const initialState = {
 };
 
 export const form = createReducer(initialState, {
-  [ActionTypeForm.UPDATE_FIELD]: (state, action) => ({
-    ...state,
-    formData: {
-      ...state.formData,
-      [action.payload.fieldName]: action.payload.value,
-    },
-  }),
+  [ActionTypeForm.UPDATE_FIELD]: (state, action) =>
+    R.assocPath(['formData', action.payload.fieldName], action.payload.value, state),
 });

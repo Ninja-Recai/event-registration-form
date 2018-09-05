@@ -16,7 +16,7 @@ class App extends PureComponent {
         <Router>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="" component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </div>

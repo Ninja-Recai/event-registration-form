@@ -1,5 +1,5 @@
 import { createReducer } from 'utils/reducers/create-reducer';
-import { ActionType } from 'actions/constants';
+import { ActionTypeEvent } from 'actions/constants';
 import * as R from 'ramda';
 
 const initialState = {
@@ -11,8 +11,8 @@ const initialState = {
 };
 
 export const events = createReducer(initialState, {
-  [ActionType.ADD_EVENT_FETCH]: state => R.assoc('isFetching', true, state),
-  [ActionType.ADD_EVENT_FETCHED]: (state, action) => {
+  [ActionTypeEvent.ADD_EVENT_FETCH]: state => R.assoc('isFetching', true, state),
+  [ActionTypeEvent.ADD_EVENT_FETCHED]: (state, action) => {
     if (action.payload.error) {
       return R.merge(state, {
         fetchReply: action.payload,
@@ -30,8 +30,5 @@ export const events = createReducer(initialState, {
       errorMessage: '',
     });
   },
-  [ActionType.ADD_EVENT_FINISHED]: state => ({
-    ...state,
-    isFetched: false,
-  }),
+  [ActionTypeEvent.ADD_EVENT_FINISHED]: state => R.assoc('isFetched', true, state),
 });

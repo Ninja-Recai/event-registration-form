@@ -19,6 +19,8 @@ DB_USERNAME=(database username)
 DB_PASSWORD=(database password)
 ```
 
+**Please remember to add the exact same express port to the `proxy` section in the /client/package.json file.**
+
 ### Installing
 
 Install server dependencies

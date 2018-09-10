@@ -10,11 +10,19 @@ const eventSchema = mongoose.Schema({
   collection: config.client.mongodb.defaultCollection,
 });
 const Event = mongoose.model('Event', eventSchema);
-const options = { useNewUrlParser: true };
+const options = { 
+  useNewUrlParser: true,
+  auth: {
+    user: config.client.mongodb.username,
+    password: config.client.mongodb.password
+  }
+ };
 class DB {
+  
   connect(uri) {
+    console.log(uri);
     return new Promise((resolve, reject) => {
-      mongoose.connect(uri).then(
+      mongoose.connect(uri, options).then(
         () => {           
           resolve('Connection to the database established');
           console.log('Connection to the database established');

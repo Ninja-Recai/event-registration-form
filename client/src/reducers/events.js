@@ -1,4 +1,4 @@
-import { createReducer } from 'utils/reducers/create-reducer';
+import { createReducer } from 'zeal-redux-utils';
 import { ActionTypeEvent } from 'actions/constants';
 import * as R from 'ramda';
 

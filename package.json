@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "concurrently --raw \"npm run server\" \"npm run client --color\"",
-    "test": "concurrently --raw \"npm run test:server -- color\" \"npm run test:client --color\"",
+    "test": "concurrently --raw \"npm run test:server --color\" \"npm run test:client --color\"",
     "server": "node ./bin/www",
     "client": "node start-client.js",
     "build:client": "node build-client.js",

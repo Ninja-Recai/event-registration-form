@@ -11,10 +11,12 @@
   },
   "scripts": {
     "start": "concurrently --raw \"npm run server\" \"npm run client --color\"",
+    "test": "concurrently --raw \"npm run test:server -- color\" \"npm run test:client --color\"",
     "server": "node ./bin/www",
     "client": "node start-client.js",
     "build:client": "node build-client.js",
     "test:client": "node test-client.js",
+    "test:server": "jest --watchAll",
     "debug": "node-debug ./bin/www",
     "express": "node ./bin/www",
     "express-debug": "node-debug ./bin/www"
@@ -31,6 +33,10 @@
     "request": "^2.87.0"
   },
   "devDependencies": {
-    "concurrently": "^3.1.0"
+    "concurrently": "^3.1.0",
+    "jest": "^23.6.0"
+  },
+  "jest": {
+    "testRegex": "js/.*\\.test.js$"
   }
 }

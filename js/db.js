@@ -20,7 +20,6 @@ const options = {
 class DB {
   
   connect(uri) {
-    console.log(uri);
     return new Promise((resolve, reject) => {
       mongoose.connect(uri, options).then(
         () => {           

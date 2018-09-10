@@ -8,22 +8,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Please note that the app uses a MongoDB database. To run the app you have to have MongoDB installed and running locally on your machine. [How to install and run MongoDB locally](https://docs.mongodb.com/manual/administration/install-community/)
+Before installing and running the app, please create a .env file in the project's root directory and fill it with necessary information as shown below.
 
-Before installing and running the app, please create a config.js file in the project's root directory, using given pattern, and fill it with necessary information: a database <name> to store the data in, default collection name and your local MongoDB instance address along with it's port.
 ```
-const config = {
-  expressPort: /express port eg. 3000/,
-  client: {
-    mongodb: {
-      defaultDatabase: /default database name eg. 'Events'/,
-      defaultCollection: /default collection name eg. 'Events'/,
-      defaultUri: /your local MongoDB instance address + port/,
-    },
-  },
-};
-
-module.exports = config;
+EXPRESS_PORT=3002,
+DEFAULT_DATABASE=events
+DEFAULT_COLLECTION=events
+DEFAULT_URI=(database uri)
+DB_USERNAME=(database username)
+DB_PASSWORD=(database password)
 ```
 
 ### Installing
@@ -60,7 +53,7 @@ npm run client
 
 ## Running the tests
 ```
-npm run test:client
+npm test
 ```
 
 ## Deployment

@@ -1,5 +1,4 @@
 // Helper methods to allow the application to interact with a MongoDB database.
-const config = require('../config.js');
 const mongoose = require('mongoose');
 const eventSchema = mongoose.Schema({
   firstName: String,
@@ -7,14 +6,14 @@ const eventSchema = mongoose.Schema({
   email: String,
   eventDate: Date,
 }, {
-  collection: config.client.mongodb.defaultCollection,
+  collection: process.env.DEFAULT_COLLECTION,
 });
 const Event = mongoose.model('Event', eventSchema);
 const options = { 
   useNewUrlParser: true,
   auth: {
-    user: config.client.mongodb.username,
-    password: config.client.mongodb.password
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD
   }
  };
 class DB {
@@ -26,8 +25,8 @@ class DB {
           resolve('Connection to the database established');
           console.log('Connection to the database established');
         },
-        err => { 
-          console.log('An error occured while trying to connect to the database.');
+        err => {
+          console.log('An error occured while trying to connect to the database.', err);
           reject('Cannot connect to the database');
         });
     });

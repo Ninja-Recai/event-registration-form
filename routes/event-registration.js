@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-const config = require('../config.js');
 const DB = require('../js/db.js');
 
 const db = new DB();
@@ -47,8 +46,8 @@ router.post('/addEvent', [
       message: errors.array().map(error => error.msg),
     });
   }
-
-  db.connect(config.client.mongodb.defaultUri).then(() => {
+    
+  db.connect(process.env.DEFAULT_URI).then(() => {
     db.saveEvent(req.body)
       .then(response => {
         if (response.ok !== false) {
@@ -60,12 +59,12 @@ router.post('/addEvent', [
       });
   },
   err => {
-    res.json({ error: true, message: err });
+    res.status(500).json({ error: true, message: err });
   });
 });
 
 router.get('/getList', function (req, res, next) {
-  db.connect(config.client.mongodb.defaultUri).then(() => {
+  db.connect(process.env.DEFAULT_URI).then(() => {
     db.getEvents()
     .then(response => {
       res.json({ response });
@@ -73,7 +72,7 @@ router.get('/getList', function (req, res, next) {
     });
   },
   err => {
-    res.json({ error: true, message: err });
+    res.status(500).json({ error: true, message: err });
   });
 });
 

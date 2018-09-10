@@ -1,4 +1,3 @@
-
 const request = require('supertest');
 const app = require('../app');
 const db = require('../js/db');
@@ -8,7 +7,7 @@ const config = require('../config');
 let eventData = {};
 
 beforeAll(() => {
-  DB.connect(config.client.mongodb.defaultUri);
+  DB.connect(process.env.DEFAULT_URI);
   eventData = {
     "firstName": "John",
     "lastName": "Doe",
@@ -40,7 +39,7 @@ describe('Adding a new event', () => {
     });
 
     describe('When the event already exists in the database', () => {
-      it('returns a 409 error', async () => {
+      it('returns a 409 status code', async () => {
         const response = await request(app)
           .post('/events/addEvent')
           .set('Content-Type', 'application/json')

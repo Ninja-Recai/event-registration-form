@@ -52,7 +52,7 @@ router.post('/addEvent', [
     db.saveEvent(req.body)
       .then(response => {
         if (response.ok !== false) {
-          res.json(response);
+          res.status(201).json(response);
         } else {
           res.json({ error: true, message: response.message });
         }

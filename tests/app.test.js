@@ -22,6 +22,11 @@ describe('Getting the events list', () => {
     const response = await request(app).get('/events/getList');
     expect(response.statusCode).toBe(200);
   });
+
+  it('returns events list', async () => {
+    const response = await request(app).get('/events/getList');
+    expect(Array.isArray(response.body.response)).toBe(true);
+  });
 });
 
 describe('Adding a new event', () => {

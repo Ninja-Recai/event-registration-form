@@ -58,6 +58,15 @@ class DB {
     });
   }
 
+  removeEvent(event) {
+    return new Promise((resolve, reject) => {
+      Event.remove({email: event.email, eventDate: event.eventDate}, function (err) {
+        if (err) reject(err);
+        resolve(`Event planned on ${event.eventDate} was removed from the database successfully.`);
+      });
+    });
+  }
+
   getEvents() {
     return new Promise((resolve, reject) => {
       Event.find(function (err, events) {

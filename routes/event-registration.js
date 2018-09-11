@@ -1,4 +1,3 @@
-const request = require('request');
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator/check');
@@ -6,11 +5,6 @@ const { sanitizeBody } = require('express-validator/filter');
 const DB = require('../js/db.js');
 
 const db = new DB();
-
-const today = new Date();
-const dd = today.getDate();
-const mm = today.getMonth() + 1;
-const yy = today.getFullYear();
 
 router.post('/addEvent', [
   body('firstName', 'Please specify your first name.')
@@ -41,7 +35,7 @@ router.post('/addEvent', [
 ], (req, res) => { 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ 
+    return res.status(422).json({
       error: true, 
       message: errors.array().map(error => error.msg),
     });
@@ -51,11 +45,12 @@ router.post('/addEvent', [
     db.saveEvent(req.body)
       .then(response => {
         if (response.ok !== false) {
-          return res.status(201).json(response);
+          res.status(201).json(response);
+          db.disconnect();
         } else {
-          return res.status(409).json({ error: true, message: response.message });
+          res.status(409).json({ error: true, message: response.message });
+          db.disconnect();
         }
-        db.disconnect();
       });
   },
   err => {

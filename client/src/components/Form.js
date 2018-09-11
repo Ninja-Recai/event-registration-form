@@ -37,6 +37,7 @@ class Form extends Component {
     formData: PropTypes.objectOf(PropTypes.string).isRequired,
     successMessage: PropTypes.string,
     errorMessage: PropTypes.string,
+    isFetching: PropTypes.bool,
   }
 
   updateField = (e) => {
@@ -86,7 +87,7 @@ class Form extends Component {
             {this.props.successMessage}
           </SuccessMessage>
         )}
-        <Button>Save the event</Button>
+        <Button disabled={this.props.isFetching}>Save the event</Button>
       </PlainForm>
     );
   }

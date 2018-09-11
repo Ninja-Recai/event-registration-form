@@ -6,6 +6,10 @@ const Button = styled.button`
   color: ${props => props.theme.white};
   transition: background-color .3s linear;
   cursor: pointer;
+  &:disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
   &:hover {
     background-color: ${props => props.theme.prim};
   }

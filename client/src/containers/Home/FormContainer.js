@@ -6,6 +6,7 @@ import Form from 'components/Form';
 const mapStateToProps = state => ({
   errorMessage: state.events.errorMessage,
   successMessage: state.events.successMessage,
+  isFetching: state.events.isFetching,
   fetchReply: state.events.fetchReply,
   formData: state.form.formData,
 });

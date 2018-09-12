@@ -19,6 +19,8 @@ DB_USERNAME=(database username)
 DB_PASSWORD=(database password)
 ```
 
+If you wish to use a local database without login information, ommit (remove) the username and password.
+
 **Please remember to add the exact same express port to the `proxy` section in the /client/package.json file.**
 
 ### Installing
@@ -55,7 +57,8 @@ npm run client
 
 ## Running the tests
 ```
-npm test
+npm run test:client
+npm run test:server
 ```
 
 ## Deployment

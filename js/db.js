@@ -9,12 +9,15 @@ const eventSchema = mongoose.Schema({
   collection: process.env.DEFAULT_COLLECTION,
 });
 const Event = mongoose.model('Event', eventSchema);
+const auth = process.env.DB_USERNAME ? {
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+} : '';
+
 const options = { 
   useNewUrlParser: true,
-  auth: {
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD
-  }
+  dbName: process.env.DEFAULT_DATABASE,
+  auth,
  };
 class DB {
   
@@ -23,11 +26,11 @@ class DB {
       mongoose.connect(uri, options).then(
         () => {           
           resolve('Connection to the database established');
-          console.log('Connection to the database established');
         },
         err => {
-          console.log('An error occured while trying to connect to the database.', err);
           reject('Cannot connect to the database');
+          console.log(err);
+          
         });
     });
   }

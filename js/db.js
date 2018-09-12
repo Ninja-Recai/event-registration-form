@@ -54,7 +54,8 @@ class DB {
             resolve({ ok: true, message: `Congratulations ${obj.firstName}, your event was added to the database succesfully.` });
           });
         } else {
-          resolve({ ok: false, message: `Your event planned on ${obj.eventDate} already exists in the database. Please select another date.` });
+          const date = new Date(obj.eventDate);
+          resolve({ ok: false, message: `Your event planned on ${date.toDateString()} already exists in the database. Please select another date.` });
         }
       });
     });

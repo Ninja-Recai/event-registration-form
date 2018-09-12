@@ -1,22 +1,26 @@
 const request = require('supertest');
 const app = require('../app');
-const db = require('../js/db');
-const DB = new db();
+const DB = require('../js/db');
+const db = new DB();
 
-const eventData = {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "johndoe@gmail.com",
-  "eventDate": "2018-09-20T00:00:00.000Z",
-};
+let eventData = {};
 
 beforeAll(() => {
-  DB.connect(process.env.DEFAULT_URI);
+  eventData = {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@gmail.com",
+    "eventDate": "2018-09-20T00:00:00.000Z",
+  };
 });
 
 afterAll(() => {
-  DB.removeEvent(eventData);
-  DB.disconnect();
+  db.connect(process.env.DEFAULT_URI).then(() => {
+    db.removeEvent(eventData)
+    .then(() => {
+      db.disconnect();
+    });
+  });
 });
 
 describe('Getting the events list', () => {
@@ -57,7 +61,6 @@ describe('Adding a new event', () => {
   
   describe('When the data is valid', () => {
     it('returns a 201 status code', (done) => {
-      DB.removeEvent(eventData);
       request(app)
         .post('/events/addEvent')
         .set('Content-Type', 'application/json')
@@ -70,7 +73,6 @@ describe('Adding a new event', () => {
 
     describe('When the event already exists in the database', () => {
       it('returns a 409 status code', (done) => {
-        DB.saveEvent(eventData);
         request(app)
           .post('/events/addEvent')
           .set('Content-Type', 'application/json')

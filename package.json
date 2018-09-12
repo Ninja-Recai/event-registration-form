@@ -16,7 +16,7 @@
     "client": "node start-client.js",
     "build:client": "node build-client.js",
     "test:client": "node test-client.js",
-    "test:server": "jest --watchAll",
+    "test:server": "jest --detectOpenHandles",
     "debug": "node-debug ./bin/www",
     "express": "node ./bin/www",
     "express-debug": "node-debug ./bin/www"
